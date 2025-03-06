@@ -17,7 +17,7 @@ func NewsSaveController(useCase *application.CreateNewUseCase) *NewSaveControlle
 	return &NewSaveController{UseCase: useCase}
 }
 
-func (nc *NewSaveController) CreateNewHandler(c *gin.Context) {
+func (nc *NewSaveController) NewCreateNewHandler(c *gin.Context) {
 	var new domain.News
 
 	if err := c.ShouldBindJSON(&new); err != nil {

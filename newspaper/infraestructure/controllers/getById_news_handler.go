@@ -9,15 +9,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type GetNewByIdController struct {
+type NewGetNewsByIdController struct {
 	UseCase *application.GetNewByIdUseCase
 }
 
-func NewGetByIdController(useCase *application.GetNewByIdUseCase) *GetNewByIdController {
-	return &GetNewByIdController{UseCase: useCase}
+func NewNewsGetByIdController(useCase *application.GetNewByIdUseCase) *NewGetNewsByIdController {
+	return &NewGetNewsByIdController{UseCase: useCase}
 }
 
-func (nc *GetNewByIdController) GetAlbumsByIdHanlder(c *gin.Context) {
+func (nc *NewGetNewsByIdController) GetAlbumsByIdHanlder(c *gin.Context) {
 	id := c.Param("id")
 	objectId, err := primitive.ObjectIDFromHex(id)
 

@@ -13,6 +13,7 @@ type Dependencies struct {
 	GetAllNewsController  *controllers.NewNewsGetAllController
 	GetNewsByIdController *controllers.NewGetNewsByIdController
 	DeleteNewsController  *controllers.NewsDeleteController
+	UpdateNewsController *controllers.NewsUpdateController
 }
 
 func Init() *Dependencies {
@@ -29,17 +30,20 @@ func Init() *Dependencies {
 	getAllNewsUseCase := application.NewGetAllNewsUseCase(newsRepo)
 	getNewsByIdUseCase := application.NewGetNewByIdUseCase(newsRepo)
 	deleteNewsUseCase := application.NewDeleteNewUseCase(newsRepo)
-
+	updateNewsUseCase := application.NewUpdateNewUseCase(newsRepo)
 
 	NewsSaveController := controllers.NewsSaveController(createNewsUseCase)
 	getAllNewsController := controllers.GetAllNewsController(getAllNewsUseCase)
 	getNewsByIdController := controllers.NewNewsGetByIdController(getNewsByIdUseCase)
 	deleteNewsController := controllers.NewNewsDeleteController(deleteNewsUseCase)
+	updateNewsController := controllers.NewNewsUpdateController(updateNewsUseCase)
+
 
 	return &Dependencies{
 		NewsSaveController:    NewsSaveController,
         GetAllNewsController:  getAllNewsController,
         GetNewsByIdController: getNewsByIdController,
         DeleteNewsController:  deleteNewsController,
+		UpdateNewsController : updateNewsController,
 	}
 }

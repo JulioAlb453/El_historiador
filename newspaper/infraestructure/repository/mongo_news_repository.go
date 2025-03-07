@@ -11,15 +11,15 @@ import (
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
-type MongoAlbumRepository struct {
+type MongoNewsRepository struct {
 	db *mongo.Database
 }
 
-func NewMongoAlbumRepository(conn *mongo.Database) *MongoAlbumRepository {
-	return &MongoAlbumRepository{db: conn}
+func NewMongoNewsRepository(conn *mongo.Database) *MongoNewsRepository {
+	return &MongoNewsRepository{db: conn}
 }
 
-func (r *MongoAlbumRepository) Save(ctx context.Context, news domain.News) error {
+func (r *MongoNewsRepository) Save(ctx context.Context, news domain.News) error {
 	collection := r.db.Collection("news")
 
 	_, err := collection.InsertOne(ctx, bson.M{
@@ -36,7 +36,7 @@ func (r *MongoAlbumRepository) Save(ctx context.Context, news domain.News) error
 	return nil
 }
 
-func (r *MongoAlbumRepository) GetNewsById(ctx context.Context, id primitive.ObjectID) (domain.News, error) {
+func (r *MongoNewsRepository) GetNewsById(ctx context.Context, id primitive.ObjectID) (domain.News, error) {
 	collection := r.db.Collection("news")
 
 	filter := bson.M{"_id": id}
@@ -54,7 +54,7 @@ func (r *MongoAlbumRepository) GetNewsById(ctx context.Context, id primitive.Obj
 	return news, nil
 }
 
-func (r *MongoAlbumRepository) GetAllNews(ctx context.Context) ([]domain.News, error) {
+func (r *MongoNewsRepository) GetAllNews(ctx context.Context) ([]domain.News, error) {
 	collection := r.db.Collection("news")
 	cursor, err := collection.Find(ctx, bson.M{})
 	if err != nil {
@@ -78,7 +78,7 @@ func (r *MongoAlbumRepository) GetAllNews(ctx context.Context) ([]domain.News, e
 	return news, nil
 }
 
-func (r *MongoAlbumRepository) UpdateNews(ctx context.Context, news domain.News) (domain.News, error) {
+func (r *MongoNewsRepository) UpdateNews(ctx context.Context, news domain.News) (domain.News, error) {
 	collection := r.db.Collection("news")
 
 	objectId, err := primitive.ObjectIDFromHex(news.Id.Hex())
@@ -109,7 +109,7 @@ func (r *MongoAlbumRepository) UpdateNews(ctx context.Context, news domain.News)
 	return news, nil
 }
 
-func (r *MongoAlbumRepository) DeleteNews(ctx context.Context, id primitive.ObjectID) error {
+func (r *MongoNewsRepository) DeleteNews(ctx context.Context, id primitive.ObjectID) error {
 	collection := r.db.Collection("news")
 
 	result, err := collection.DeleteOne(ctx, bson.M{"_id": id})

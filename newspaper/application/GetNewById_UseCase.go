@@ -11,8 +11,8 @@ type GetNewByIdUseCase struct {
 	repo domain.INews
 }
 
-func NewGetNewByIdUseCase(repo domain.INews) GetNewByIdUseCase {
-	return GetNewByIdUseCase{repo: repo}
+func NewGetNewByIdUseCase(repo domain.INews) *GetNewByIdUseCase {
+	return &GetNewByIdUseCase{repo: repo}
 }
 
 func (uc *GetNewByIdUseCase) Execute(ctx context.Context, id primitive.ObjectID) (domain.News, error) {

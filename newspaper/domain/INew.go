@@ -9,6 +9,6 @@ type INews interface {
 	Save(ctx context.Context, new News) error
 	GetAllNews(ctx context.Context) ([]News, error)
 	GetNewsById(ctx context.Context, id primitive.ObjectID) (News,error)
-	Delete(ctx context.Context,id primitive.ObjectID ) (error)
-	Update(ctx context.Context, new News) (News,error)
+	DeleteNews(ctx context.Context,id primitive.ObjectID ) (error)
+	UpdateNews(ctx context.Context, new News) (News,error)
 }

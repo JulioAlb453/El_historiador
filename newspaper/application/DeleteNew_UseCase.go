@@ -16,7 +16,7 @@ func NewDeleteNewUseCase(repo domain.INews) *DeleteNewUseCase {
 }
 
 func (uc *DeleteNewUseCase) Execute(ctx context.Context, id primitive.ObjectID) (domain.News, error) {
-	err := uc.repo.Delete(ctx, id)
+	err := uc.repo.DeleteNews(ctx, id)
 
 	if err != nil {
 		return domain.News{}, err

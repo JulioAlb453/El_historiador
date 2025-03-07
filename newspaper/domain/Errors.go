@@ -18,6 +18,8 @@ var (
 	ErrMissingField           = errors.New("Faltan campos obligatorios")
 	ErrInvalidData            = errors.New("Datos invalidos")
 	ErrInternalError          = errors.New("Ocurrio un error interno al procesar la solicitud")
+	
+	ErrNewsNotFound          = errors.New("Noticia no encontrada")
 	ErrMissingTitle           = errors.New("El titulo es requerido")
 	ErrMissingAuthor          = errors.New("El nombre del autor es requerido")
 	ErrMissingContent         = errors.New("El contenido es requerido")

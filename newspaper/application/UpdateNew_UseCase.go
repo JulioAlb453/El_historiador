@@ -47,7 +47,7 @@ func (uc *UpdateNewUseCase) Execute(ctx context.Context, new domain.News) (domai
 	existingNew.PublicationDate = new.PublicationDate
 	existingNew.Topic = new.Topic
 
-	updateNew, err := uc.repo.Update(ctx, existingNew)
+	updateNew, err := uc.repo.UpdateNews(ctx, existingNew)
 
 	if err != nil {
 		return domain.News{}, err

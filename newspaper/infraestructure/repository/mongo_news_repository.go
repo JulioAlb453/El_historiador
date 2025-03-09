@@ -89,12 +89,12 @@ func (r *MongoNewsRepository) UpdateNews(ctx context.Context, news domain.News) 
 	filter := bson.M{"_id": objectId}
 	update := bson.M{
 		"$set": bson.M{
-			"Title":            news.Title,
-			"Author":           news.Author,
-			"Description":      news.Description,
-			"Content":          news.Content,
-			"Topic":            news.Topic,
-			"Publication Date": news.PublicationDate,
+			"Title":           news.Title,
+			"Author":          news.Author,
+			"Description":     news.Description,
+			"Content":         news.Content,
+			"Topic":           news.Topic,
+			"PublicationDate": news.PublicationDate,
 		},
 	}
 

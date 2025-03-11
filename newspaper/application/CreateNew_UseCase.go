@@ -9,7 +9,7 @@ type CreateNewUseCase struct {
 	repo domain.INews
 }
 
-func NewCreateNewUseCase(repo domain.INews) *CreateNewUseCase {
+func NewCreateNewsUseCase(repo domain.INews) *CreateNewUseCase {
 	return &CreateNewUseCase{repo: repo}
 }
 

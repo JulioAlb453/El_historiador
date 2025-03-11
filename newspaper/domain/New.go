@@ -9,5 +9,5 @@ type News struct {
 	Content         string             `json:"content"`
 	Topic           string             `json:"topic"`
 	Author          string             `json:"author"`
-	PublicationDate string             `json:"publication"`
+	PublicationDate string             `json:"PublicationDate"`
 }

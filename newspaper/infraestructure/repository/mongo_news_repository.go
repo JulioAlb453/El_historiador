@@ -1,9 +1,13 @@
 package repository
 
 import (
+	"bytes"
 	"context"
+	"encoding/json"
 	"errors"
+	"log"
 	"main/newspaper/domain"
+	"net/http"
 
 	"go.mongodb.org/mongo-driver/bson"
 	"go.mongodb.org/mongo-driver/mongo"
@@ -33,7 +37,25 @@ func (r *MongoNewsRepository) Save(ctx context.Context, news domain.News) error 
 	if err != nil {
 		return errors.New("Error al guardar la noticia: " + err.Error())
 	}
+	go r.notifyPublisher(news)
 	return nil
+}
+
+func (r *MongoNewsRepository) notifyPublisher(news domain.News) {
+	publisherURL := "http://localhost:8081/publish"
+
+	payload, err := json.Marshal(news)
+	if err != nil {
+		return
+	}
+
+	log.Printf("Enviando mensaje: %+v al publisher\n", string(payload))
+
+	resp, err := http.Post(publisherURL, "application/json", bytes.NewBuffer(payload))
+	if err != nil {
+		return
+	}
+	defer resp.Body.Close()
 }
 
 func (r *MongoNewsRepository) GetNewsById(ctx context.Context, id primitive.ObjectID) (domain.News, error) {
